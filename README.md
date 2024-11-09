@@ -44,7 +44,7 @@ git clone https://github.com/your-username/melanoma-detection.git
 cd melanoma-detection
 ```
 
-### Step 2: SSL serteficates
+### Step 2: SSL certeficates
 
 Need to create SSL certificates for a secure connection. Afterwards, two files need to be replaced in the `ssl` directory:
 - **cert.key** - private key
