@@ -9,8 +9,8 @@ server {
 
 server {
     listen 443 ssl;
-    ssl_certificate     /ssl/sert.pem;
-    ssl_certificate_key /ssl/sert.key;
+    ssl_certificate     /ssl/сert.pem;
+    ssl_certificate_key /ssl/сert.key;
     server_name     melanoma-scan.site;
     index           index.html;
     client_max_body_size 1G;

@@ -25,3 +25,34 @@ Project link [https://melanoma-scan.site/](https://melanoma-scan.site/)
 **Deployment:** The app is hosted on a Linux VPS with Docker Compose managing containerized services for frontend, backend, and reverse proxy. 
 
 **Note:** This project is intended for educational purposes and should not be used as a standalone diagnostic tool.
+
+---
+
+## Installation Guide for Melanoma Detection Web Application
+
+This guide explains how to set up the Melanoma Detection web application using Docker Compose. Ensure that Docker and Docker Compose are installed on your system before proceeding.
+
+### Prerequisites
+
+- **Docker**: Install Docker engine from [Docker’s official website](https://docs.docker.com/engine/install/).
+
+### Step 1: Clone the Repository
+
+Clone this GitHub repository to your local machine:
+```bash
+git clone https://github.com/your-username/melanoma-detection.git
+cd melanoma-detection
+```
+
+### Step 2: SSL serteficates
+
+Need to create SSL certificates for a secure connection. Afterwards, two files need to be replaced in the `ssl` directory:
+- **cert.key** - private key
+- **cert.pem** - public key
+
+### Step 3: Start docker containers
+
+Use this command to build and start
+```shell
+docker compose up -d --build
+```
