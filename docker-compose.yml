@@ -16,6 +16,7 @@ services:
     build: ./backend
     environment:
       - PYTHONUNBUFFERED=1
+      - UV_LINK_MODE=copy
       - TF_MODEL_PATH=${TF_MODEL_PATH}
     volumes:
       - ./backend:/app
