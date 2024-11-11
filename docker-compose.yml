@@ -16,8 +16,10 @@ services:
     build: ./backend
     environment:
       - PYTHONUNBUFFERED=1
+      - TF_MODEL_PATH=${TF_MODEL_PATH}
     volumes:
       - ./backend:/app
+      - ./backend/tf_models/model.keras:${TF_MODEL_PATH}
 
   frontend:
     container_name: frontend
