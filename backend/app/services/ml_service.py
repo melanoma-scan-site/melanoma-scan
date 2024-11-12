@@ -21,4 +21,8 @@ def predict(image_bytes: bytes) -> float:
     
     # ['Melanoma', 'NotMelanoma'] types
     # first element is the probability of melanoma
-    return round(prediction[0][0], 2)
+    melanoma_probability = prediction[0][0]
+    not_melanoma_probability = prediction[0][1]
+    
+    result = round(melanoma_probability, 2) if melanoma_probability > not_melanoma_probability else 0.0
+    return result
