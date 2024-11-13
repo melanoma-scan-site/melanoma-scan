@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <script>
 	import { Sun, Moon } from 'lucide-svelte';
 	import { toggleMode } from 'mode-watcher';
@@ -16,7 +15,3 @@
 		<span class="sr-only">Toggle theme</span>
 	</Button>
 </main>
-=======
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation..</p>
->>>>>>> 513adf190e759188bfc70e3ebdbc7bcc356d06f4
