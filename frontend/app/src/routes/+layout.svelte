@@ -6,6 +6,4 @@
 </script>
 
 <ModeWatcher />
-<div class="min-h-screen">
-	{@render children()}
-</div>
+{@render children()}
