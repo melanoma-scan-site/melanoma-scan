@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi import HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi import Form
 
 from models import dto
@@ -8,6 +9,14 @@ from services import ml_service
 
 
 app = FastAPI()
+
+# CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"])
 
 @app.post("/check", response_model=dto.MelanomaStatus)
 def check_for_melanoma(base64_file: str = Form()):
