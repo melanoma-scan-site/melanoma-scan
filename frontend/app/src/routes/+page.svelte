@@ -51,7 +51,7 @@
 
 			xhr.onerror = () => reject(new Error('Upload failed'));
 
-			xhr.open('POST', 'https://melanoma-scan.site/check');
+			xhr.open('POST', 'https://melanoma-scan.site/api/check');
 			xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 			xhr.send(`base64_file=${encodeURIComponent(base64)}`);
 		});
