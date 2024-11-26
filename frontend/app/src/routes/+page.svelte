@@ -18,6 +18,9 @@
 	let loading = $state(false);
 	let uploadProgress = $state(0);
 	let selectedFile = $state(null);
+    let isResults = $state(false);
+    let prediction = $state(0);
+    let isMelanoma = $state(false);
 
 	function createFileReader(file) {
 		return new Promise((resolve, reject) => {
@@ -48,9 +51,9 @@
 
 			xhr.onerror = () => reject(new Error('Upload failed'));
 
-			xhr.open('POST', 'https://melanoma-scan.site/api/test');
-			xhr.setRequestHeader('Content-Type', 'application/json');
-			xhr.send(JSON.stringify({ image: base64 }));
+			xhr.open('POST', 'http://melanoma-scan.site:5000/check');
+			xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+			xhr.send(`base64_file=${encodeURIComponent(base64)}`);
 		});
 	}
 
@@ -73,7 +76,15 @@
 			selectedFile = file;
 
 			const base64 = await createFileReader(file);
-			await uploadImage(base64);
+
+            // prepare to correct base64 format
+            const base64Parts = base64.split(',', 2);
+			let results = await uploadImage(base64Parts[1]);
+
+            // set results to true
+            isResults = true;
+            isMelanoma = results['is_melanoma'];
+            prediction = results['percent'];
 
 			currentStep = 2;
 		} catch (error) {
@@ -94,8 +105,7 @@
 	<div class="bg-muted w-11/12 rounded-2xl p-4 text-sm md:w-4/12 flex flex-col">
 		<h2 class="font-bold text-center">Disclaimer</h2>
 		<p
-			class="text
-            "
+			class="text-muted-foreground mt-4"
 		>
 			This tool is not a substitute for professional medical advice, diagnosis, or treatment. Always
 			seek the advice of your physician or other qualified health provider with any questions you
@@ -193,7 +203,7 @@
 						<div class="grid">
 							<p class="font-bold">{selectedFile.name}</p>
 							<p class="text-muted-foreground text-sm">
-								{Math.round(selectedFile.size / (1024 * 1024))} MB
+								{Math.round(selectedFile.size / (1024))} KB
 							</p>
 						</div>
 					</div>
@@ -202,12 +212,57 @@
 					{/if}
 				</div>
 			{/if}
+
+            {#if isResults === true}
+                <!-- show is melanoma results -->
+                <div>
+                    {#if isMelanoma === false}
+                        <h2 class="font-bold text-center mt-4 text-green-700">Prediction for melanoma {prediction}%</h2>
+                        <div class="bg-muted w-full rounded-2xl p-4 text-sm flex flex-col">
+                            <p class="text text-green-700">
+                                The image you uploaded is not a melanoma.                                
+                            </p>
+                            <br/>
+                            
+                            <p>
+                                <!-- disclaimer -->
+                                <span class="text-muted-foreground">
+                                    This tool is not a substitute for professional medical advice, diagnosis, or treatment. Always
+                                    seek the advice of your physician or other qualified health provider with any questions you
+                                    may have regarding a medical condition. Never disregard professional medical advice or delay
+                                    in seeking it because of something you have read on this website.
+                                </span>
+                            </p>
+                        </div>
+                    {/if}
+                    {#if isMelanoma === true}
+                        <h2 class="font-bold text-center mt-4 text-red-700">Prediction for melanoma {prediction}%</h2>
+                        <div class="bg-muted w-full rounded-2xl p-4 text-sm flex flex-col">
+                            <p class="text text-red-700">
+                                The image you uploaded is a melanoma.                                
+                            </p>
+                            <br/>
+                            <p>
+                                <span class="text-red-700">
+                                    Please consult a doctor immediately.
+                                </span>
+                            </p>
+                            <br/>
+                            
+                            <p>
+                                <!-- disclaimer -->
+                                <span class="text-muted-foreground">
+                                    This tool is not a substitute for professional medical advice, diagnosis, or treatment. Always
+                                    seek the advice of your physician or other qualified health provider with any questions you
+                                    may have regarding a medical condition. Never disregard professional medical advice or delay
+                                    in seeking it because of something you have read on this website.
+                                </span>
+                            </p>
+                        </div>
+                    {/if}
+                </div>
+            {/if}
 		</Card.Content>
-		<Card.Footer>
-			<div class="mt-3 flex w-full justify-start">
-				<a class="text-muted-foreground inline-flex gap-x-2" href="/help"><CircleHelp />Help</a>
-			</div>
-		</Card.Footer>
 	</Card.Root>
     {/if}
 
