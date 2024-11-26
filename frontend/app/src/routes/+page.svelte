@@ -12,6 +12,7 @@
 	const MAX_SIZE_BYTES = MAX_SIZE_MB * 1024 * 1024;
 	const ALLOWED_TYPES = ['image/jpeg', 'image/png'];
 
+    let isDisclaimerAccepted = $state(false);
 	let dragOver = $state(false);
 	let currentStep = $state(1);
 	let loading = $state(false);
@@ -88,6 +89,35 @@
 </script>
 
 <main class="flex min-h-screen flex-col items-center justify-center gap-y-6">
+	<!-- Disclaimer -->
+    {#if isDisclaimerAccepted === false}
+	<div class="bg-muted w-11/12 rounded-2xl p-4 text-sm md:w-4/12 flex flex-col">
+		<h2 class="font-bold text-center">Disclaimer</h2>
+		<p
+			class="text
+            "
+		>
+			This tool is not a substitute for professional medical advice, diagnosis, or treatment. Always
+			seek the advice of your physician or other qualified health provider with any questions you
+			may have regarding a medical condition. Never disregard professional medical advice or delay
+			in seeking it because of something you have read on this website.
+		</p>
+
+        <!-- button to accept -->
+        <button
+            class="btn btn-blue mt-4 block text-right"
+            onclick={() => {
+                isDisclaimerAccepted = true;
+                console.log(isDisclaimerAccepted);
+            }}>
+            <span>
+                <Check class='inline' />
+            </span>
+        </button>
+	</div>
+    {/if}
+
+    {#if isDisclaimerAccepted === true}
 	<!-- Step indication/progress component -->
 	<div class="pointer-events-none flex w-11/12 items-center justify-center gap-2 md:w-4/12">
 		{#each ['Upload file', 'Results'] as step, i}
@@ -179,4 +209,6 @@
 			</div>
 		</Card.Footer>
 	</Card.Root>
+    {/if}
+
 </main>
