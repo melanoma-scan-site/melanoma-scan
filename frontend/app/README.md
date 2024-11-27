@@ -9,7 +9,7 @@ The purpose of the frontend is to serve a web application ([melanoma-scan.site](
 - [Svelte](https://svelte.dev/) - Framework for building fast and reactive web applications.
 - [SvelteKit](https://kit.svelte.dev/) - Full-stack framework for Svelte with routing and SSR.
 - [Tailwind CSS](https://tailwindcss.com/) - CSS framework for easier and better CSS styling.
-- [shadcn-svelte](https://www.shadcn-svelte.com/) - UI components library for ported to Svelte, styled with Tailwind CSS.
+- [shadcn-svelte](https://www.shadcn-svelte.com/) - shadcn UI component library ported to Svelte, styled with Tailwind CSS.
 - [Lucide icons](https://lucide.dev/) - Open-source, customizable, icon library.
 - [jsPDF](https://github.com/parallax/jsPDF) - JavaScript library for generating PDF documents.
 - [LayerChart](https://www.layerchart.com/) - Interactive charting library for visualizing data.
