@@ -32,6 +32,7 @@
 	"dependencies": {
 		"@fontsource/inter": "^5.1.0",
 		"@sveltejs/adapter-node": "^5.2.9",
+		"dotenv": "^16.4.5",
 		"jspdf": "^2.5.2",
 		"layerchart": "^0.59.1"
 	}
