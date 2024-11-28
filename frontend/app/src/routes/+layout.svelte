@@ -7,9 +7,13 @@
 	let { children } = $props();
 </script>
 
+<!-- For showing notifications/alerts -->
 <Toaster />
+
+<!-- For theme changing -->
 <ModeWatcher />
 
+<!-- Render page with topbar -->
 <div class="flex h-full min-h-screen flex-col">
 	<Topbar />
 	{@render children()}

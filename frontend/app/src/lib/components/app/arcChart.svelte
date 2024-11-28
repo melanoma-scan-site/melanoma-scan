@@ -3,9 +3,10 @@
 	import { cls } from '@layerstack/tailwind';
 	import { cubicInOut } from 'svelte/easing';
 
-	let { detectionConfidence = 0, melanomaDetected = false } = $props();
+	let { detectionConfidence = 0 } = $props();
 </script>
 
+<!-- Arc chart that shows the AI detection confidence in percentage  -->
 <Chart>
 	<Svg center>
 		<Arc

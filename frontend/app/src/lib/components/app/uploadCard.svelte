@@ -4,6 +4,7 @@
 	import * as Card from '$lib/components/ui/card/index.js';
 	import { Progress } from '$lib/components/ui/progress/index.js';
 
+	// Image spec requirements
 	const MAX_SIZE_MB = 60;
 	const MAX_SIZE_BYTES = MAX_SIZE_MB * 1024 * 1024;
 	const ALLOWED_TYPES = ['image/jpeg', 'image/png'];
@@ -19,6 +20,7 @@
 		melanomaDetected = $bindable()
 	} = $props();
 
+	// Convert uploaded file to base64 string
 	function convertToBase64(file) {
 		return new Promise((resolve, reject) => {
 			const reader = new FileReader();
@@ -28,6 +30,7 @@
 		});
 	}
 
+	// Upload base64 encoded image to API. With progress tracking
 	async function uploadImage(base64) {
 		const xhr = new XMLHttpRequest();
 
@@ -58,6 +61,7 @@
 		});
 	}
 
+	// Process and validate uploaded image file, convert to base64, send to server for melanoma detection
 	async function handleFile(file) {
 		if (!file) return;
 
@@ -93,8 +97,10 @@
 	}
 </script>
 
+<!-- Upload card -->
 <Card.Root class="w-11/12 md:w-4/12">
 	<Card.Content>
+		<!-- Drag and drop section -->
 		<label
 			class="group relative flex h-56 w-full flex-col items-center justify-center gap-y-2 rounded-2xl border-[2.3px] border-dashed transition-colors {dragOver
 				? 'border-indigo-500 bg-indigo-500/5'
@@ -140,11 +146,13 @@
 			</div>
 		</label>
 
+		<!-- Display image file requirements -->
 		<div class="mt-3 flex justify-between text-sm text-muted-foreground">
 			<p>Supported formats: JPEG, PNG</p>
 			<p>Maximum size: {MAX_SIZE_MB} MB</p>
 		</div>
 
+		<!-- Show preview/specs of the uploaded file -->
 		{#if selectedFile}
 			<div class="mt-10 flex w-full flex-col gap-y-2 rounded-2xl bg-muted p-4">
 				<div class="flex items-center gap-x-2">
@@ -156,6 +164,7 @@
 						</p>
 					</div>
 				</div>
+				<!-- Show progress of sending API request with image to the server. Useful for slow internet -->
 				{#if loading}
 					<Progress class="bg-zinc-200" value={uploadProgress} />
 				{/if}
@@ -163,6 +172,7 @@
 		{/if}
 	</Card.Content>
 	<Card.Footer>
+		<!-- Redirect to help page on click -->
 		<div class="mt-3 flex w-full justify-start">
 			<a class="inline-flex gap-x-2 text-muted-foreground" href="/help"><CircleHelp />Help</a>
 		</div>

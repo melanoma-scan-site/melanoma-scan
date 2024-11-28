@@ -7,6 +7,7 @@
 	import { buttonVariants } from '$lib/components/ui/button/index.js';
 </script>
 
+<!-- Just a dropdown to change the theme -->
 <div class="flex justify-end p-4">
 	<DropdownMenu.Root>
 		<DropdownMenu.Trigger class={buttonVariants({ variant: 'outline', size: 'icon' })}>

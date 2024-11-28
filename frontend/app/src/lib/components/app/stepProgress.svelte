@@ -1,12 +1,12 @@
 <script>
 	import { Check } from 'lucide-svelte';
-
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { Separator } from '$lib/components/ui/separator/index.js';
 
 	let { currentStep = 1 } = $props();
 </script>
 
+<!--  Display a two-step progress indicator showing current stage (Upload/Results) with checkmarks for completed steps-->
 <div class="pointer-events-none flex w-11/12 items-center justify-center gap-2 md:w-4/12">
 	{#each ['Upload file', 'Results'] as step, i}
 		{#if i > 0}

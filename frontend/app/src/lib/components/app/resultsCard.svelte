@@ -12,6 +12,7 @@
 		currentStep = $bindable()
 	} = $props();
 
+	// Generate a PDF report containing melanoma scan results, medical disclaimer, and analyzed preview image if available
 	async function generatePDF() {
 		const doc = new jsPDF();
 
@@ -41,20 +42,24 @@
 		}
 	}
 
+	// Reset so it shows upload card and removes the uploaded file
 	function reset() {
 		currentStep = 1;
 		selectedFile = null;
 	}
 </script>
 
+<!-- Card component -->
 <Card.Root class="w-11/12 md:w-4/12">
 	<Card.Content>
 		<Button class="p4" variant="outline" size="icon" onclick={reset}><ArrowLeft /></Button>
 
+		<!-- Arc chart component -->
 		<div class="h-60 p-4">
 			<ArcChart {detectionConfidence} {melanomaDetected} />
 		</div>
 
+		<!-- Medical disclaimer -->
 		<div class="mt-7 w-full gap-y-2 text-pretty rounded-2xl bg-muted p-4">
 			<p class="text-sm text-muted-foreground">
 				Based on the image provided, the AI analysis suggests a <span class="font-bold"
@@ -64,7 +69,8 @@
 				for a thorough evaluation. Early detection and expert advice are key to effective care.
 			</p>
 		</div>
-		<!-- PDF results file component -->
+
+		<!-- Preview of PDF containing results, can be downloaded with generatePDF call -->
 		<div class="mt-7 flex w-full flex-col gap-y-2 rounded-2xl bg-muted p-4">
 			<div class="flex items-center gap-x-2">
 				<File size={40} strokeWidth={1} />
@@ -87,6 +93,7 @@
 		</div>
 	</Card.Content>
 	<Card.Footer>
+		<!-- Redirect to help page -->
 		<div class="mt-3 flex w-full justify-start">
 			<a
 				class="inline-flex gap-x-2 text-muted-foreground transition-colors hover:text-indigo-500"
