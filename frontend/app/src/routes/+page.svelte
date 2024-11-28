@@ -1,9 +1,10 @@
 <script>
 	import ResultsCard from '$lib/components/app/resultsCard.svelte';
 	import UploadCard from '$lib/components/app/uploadCard.svelte';
+	import Disclaimer from '$lib/components/app/disclaimer.svelte';
 	import StepProgress from '$lib/components/app/stepProgress.svelte';
 
-	let currentStep = $state(1);
+	let currentStep = $state(0);
 	let selectedFile = $state(null);
 
 	// Results from AI prediction
@@ -13,9 +14,14 @@
 
 <main class="flex flex-grow flex-col items-center justify-center gap-y-6 py-6 md:px-6">
 	<!-- Step indication/progress component -->
-	<StepProgress {currentStep} />
+	{#if currentStep !== 0}
+		<StepProgress {currentStep} />
+	{/if}
 
-	{#if currentStep === 1}
+	<!-- Disclaimer -->
+	{#if currentStep === 0}
+        <Disclaimer bind:currentStep />
+	{:else if currentStep === 1}
 		<!-- Step 1 card: Upload image -->
 		<UploadCard bind:currentStep bind:selectedFile bind:detectionConfidence bind:melanomaDetected />
 	{:else if currentStep === 2}
